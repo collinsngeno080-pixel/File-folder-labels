@@ -22,33 +22,46 @@ body {
   overflow-x: hidden;
 }
 
+/* === HIGHLIGHT (two-tone headlines) === */
+.highlight { color: var(--orange); }
+
 /* === NAV === */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(255,255,255,0.90);
+  background: rgba(255,255,255,0.92);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 0.5px solid var(--border);
-  height: 52px;
+  height: 72px;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 48px;
 }
 .nav-logo {
-  font-size: 15px; font-weight: 600; color: var(--navy);
-  letter-spacing: -0.01em; text-decoration: none; white-space: nowrap;
+  display: flex; align-items: center;
+  text-decoration: none; flex-shrink: 0;
 }
-.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-logo-img { height: 52px; width: auto; display: block; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a {
-  font-size: 13px; color: var(--muted); text-decoration: none;
+  font-size: 16px; color: var(--muted); text-decoration: none;
   transition: color 0.2s;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--navy); }
+.nav-right { display: flex; align-items: center; gap: 18px; }
 .nav-cta {
-  font-size: 13px; font-weight: 500; color: #fff; text-decoration: none;
-  background: var(--orange); padding: 7px 18px;
-  border-radius: 20px; transition: opacity 0.2s; white-space: nowrap;
+  font-size: 15px; font-weight: 500; color: #fff; text-decoration: none;
+  background: var(--orange); padding: 10px 24px;
+  border-radius: 24px; transition: opacity 0.2s; white-space: nowrap;
 }
 .nav-cta:hover { opacity: 0.8; }
+.nav-social { display: flex; gap: 14px; align-items: center; }
+.nav-social a {
+  color: var(--orange); opacity: 0.8;
+  display: flex; align-items: center;
+  transition: opacity 0.2s; text-decoration: none;
+}
+.nav-social a:hover { opacity: 1; }
+.nav-social svg { display: block; width: 20px; height: 20px; }
 
 /* === BUTTONS === */
 .btn-primary {
@@ -63,13 +76,13 @@ nav {
 .btn-outline {
   display: inline-block;
   font-size: 15px; font-weight: 500;
-  color: var(--orange); background: transparent;
-  border: 1.5px solid var(--orange);
+  color: var(--navy); background: transparent;
+  border: 1.5px solid var(--navy);
   padding: 11px 28px; border-radius: 24px;
   text-decoration: none;
   transition: background 0.2s, color 0.2s;
 }
-.btn-outline:hover { background: var(--orange); color: #fff; }
+.btn-outline:hover { background: var(--navy); color: #fff; }
 
 /* === ORANGE LABEL (page eyebrow) === */
 .orange-label {
@@ -81,7 +94,7 @@ nav {
 
 /* === SHARED PAGE HEADER === */
 .page-header {
-  padding: 148px 24px 96px;
+  padding: 160px 24px 96px;
   text-align: center;
   border-bottom: 0.5px solid var(--border);
 }
@@ -113,32 +126,36 @@ nav {
 }
 .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-/* === FOOTER === */
+/* === FOOTER — dark navy === */
 footer {
-  border-top: 0.5px solid var(--border);
-  padding: 52px 40px 36px;
+  background: var(--navy);
+  padding: 52px 60px 36px;
 }
 .footer-top {
-  display: flex; align-items: flex-start; justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 28px; margin-bottom: 36px;
 }
-.footer-brand { display: flex; flex-direction: column; gap: 7px; }
-.footer-logo {
-  font-size: 15px; font-weight: 600; color: var(--navy);
-  text-decoration: none; letter-spacing: -0.01em;
+.footer-brand { display: flex; align-items: center; gap: 20px; }
+.footer-logo-img { height: 68px; width: auto; object-fit: contain; flex-shrink: 0; }
+.footer-divider {
+  width: 1px; height: 52px;
+  background: rgba(255,255,255,0.18); flex-shrink: 0;
 }
-.footer-tagline {
-  font-size: 13px; color: var(--muted); font-style: italic;
+.footer-brand-text { display: flex; flex-direction: column; gap: 5px; }
+.footer-name {
+  font-size: 16px; font-weight: 700; color: #fff;
+  letter-spacing: -0.01em; line-height: 1;
 }
-.footer-links { display: flex; gap: 24px; list-style: none; align-items: center; }
+.footer-tagline { font-size: 13px; color: rgba(255,255,255,0.42); font-style: italic; }
+.footer-links { display: flex; gap: 28px; list-style: none; align-items: center; }
 .footer-links a {
-  font-size: 13px; color: var(--muted); text-decoration: none;
+  font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none;
   transition: color 0.2s;
 }
-.footer-links a:hover { color: var(--navy); }
+.footer-links a:hover { color: #fff; }
 .footer-copy {
-  font-size: 12px; color: var(--muted);
-  border-top: 0.5px solid var(--border); padding-top: 24px;
+  font-size: 12px; color: rgba(255,255,255,0.28);
+  border-top: 0.5px solid rgba(255,255,255,0.1); padding-top: 24px;
 }
 
 /* ============================================================
@@ -148,17 +165,19 @@ footer {
   min-height: 100vh;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  text-align: center; padding: 120px 24px 100px;
+  text-align: center;
+  padding: 140px 24px 100px;
+  background: var(--surface);
 }
 #hero h1 {
-  font-size: clamp(36px, 5.8vw, 70px);
+  font-size: clamp(32px, 4.6vw, 58px);
   font-weight: 600; line-height: 1.06; letter-spacing: -0.032em;
   color: var(--navy); max-width: 900px; margin-bottom: 24px;
 }
 .hero-sub {
   font-size: clamp(16px, 2vw, 20px); font-weight: 300;
   color: var(--muted); max-width: 480px; line-height: 1.65;
-  margin-bottom: 44px; font-style: italic;
+  margin-bottom: 44px;
 }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
@@ -166,8 +185,9 @@ footer {
    HOME — VIDEO SECTION
    ============================================================ */
 #video-section {
-  padding: 100px 40px 0;
+  padding: 100px 40px 60px;
   text-align: center;
+  background: var(--bg);
   border-top: 0.5px solid var(--border);
 }
 #video-section h2 {
@@ -179,9 +199,8 @@ footer {
 .video-shell-home {
   width: 100%; aspect-ratio: 16/9;
   background: var(--surface);
-  border-radius: 18px 18px 0 0;
+  border-radius: 18px;
   border: 0.5px solid var(--border);
-  border-bottom: none;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 18px;
 }
@@ -206,32 +225,64 @@ footer {
    HOME — THREE STEPS
    ============================================================ */
 #three-steps {
-  padding: 120px 40px;
+  padding: 100px 40px 120px;
+  background: var(--surface);
   border-top: 0.5px solid var(--border);
 }
 .section-header {
-  text-align: center; margin-bottom: 72px;
+  text-align: center; margin-bottom: 60px;
 }
 .section-header h2 {
-  font-size: clamp(26px, 3.8vw, 46px);
+  font-size: clamp(26px, 3.8vw, 44px);
   font-weight: 600; letter-spacing: -0.025em; color: var(--navy);
 }
 .steps-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  max-width: 1040px; margin: 0 auto;
-  border: 0.5px solid var(--border);
+  gap: 20px; max-width: 1040px; margin: 0 auto;
 }
-.step-col {
-  padding: 52px 44px;
-  border-right: 0.5px solid var(--border);
+
+/* Step flip cards */
+.step-flip-card {
+  perspective: 1000px; cursor: pointer;
+  height: 320px;
 }
-.step-col:last-child { border-right: none; }
-.step-col h3 {
-  font-size: 22px; font-weight: 600; letter-spacing: -0.02em;
-  color: var(--navy); margin-bottom: 16px;
+.step-flip-inner {
+  width: 100%; height: 100%; position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.step-col p {
-  font-size: 16px; font-weight: 300; color: var(--muted); line-height: 1.75;
+.step-flip-card.flipped .step-flip-inner { transform: rotateY(180deg); }
+.step-flip-front, .step-flip-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background: var(--bg);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 18px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 44px 36px; text-align: center;
+}
+.step-flip-back { transform: rotateY(180deg); }
+.step-icon {
+  width: 60px; height: 60px; object-fit: contain;
+  margin-bottom: 22px; flex-shrink: 0;
+}
+.step-flip-name {
+  font-size: 20px; font-weight: 700; color: var(--orange);
+  letter-spacing: -0.01em;
+}
+.step-flip-back h3 {
+  font-size: 20px; font-weight: 600; color: var(--orange);
+  letter-spacing: -0.015em; margin-bottom: 14px;
+}
+.step-flip-back p {
+  font-size: 15px; font-weight: 300; color: var(--muted);
+  line-height: 1.72; margin-bottom: 28px;
+}
+.step-underline {
+  width: 44px; height: 2.5px;
+  background: var(--orange); border-radius: 2px;
 }
 
 /* ============================================================
@@ -241,7 +292,7 @@ footer {
   padding: 120px 24px;
   text-align: center;
   border-top: 0.5px solid var(--border);
-  background: var(--surface);
+  background: var(--bg);
 }
 #final-cta h2 {
   font-size: clamp(26px, 4.2vw, 52px);
@@ -318,89 +369,44 @@ footer {
    FEATURES — HERO BRIDGE LINE
    ============================================================ */
 #features-bridge {
-  padding: 56px 24px;
+  padding: 40px 24px 0;
   text-align: center;
-  border-bottom: 0.5px solid var(--border);
 }
 #features-bridge p {
-  font-size: 17px; font-weight: 300; color: var(--muted);
-  font-style: italic; max-width: 600px; margin: 0 auto; line-height: 1.7;
+  font-size: 17px; font-weight: 400; color: var(--navy);
+  max-width: 600px; margin: 0 auto; line-height: 1.7;
 }
 
 /* ============================================================
-   FEATURES — FLIP CARDS
+   FEATURES — CARDS
    ============================================================ */
 #features-grid {
-  padding: 80px 40px 100px;
+  padding: 72px 40px 100px;
   max-width: 1160px; margin: 0 auto;
 }
 .cards-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
-.flip-card {
-  perspective: 1300px; cursor: pointer; aspect-ratio: 4/3;
+.feature-card {
+  background: var(--bg);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  padding: 44px 32px 40px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
 }
-.flip-inner {
-  width: 100%; height: 100%; position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Desktop: flip on hover */
-@media (hover: hover) and (pointer: fine) {
-  .flip-card:hover .flip-inner { transform: rotateY(180deg); }
-}
-/* Mobile tap: flip via .flipped class (set by JS) */
-.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
-
-.flip-front, .flip-back {
-  position: absolute; inset: 0;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
-  border-radius: 14px; overflow: hidden;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 40px 36px; text-align: center;
-}
-
-/* Front face: dark navy gradient (replace with real photo via background-image) */
-.flip-front {
-  background: linear-gradient(145deg, #1a2744 0%, #243664 60%, #1a2744 100%);
-  border: 0.5px solid rgba(255,255,255,0.06);
-}
-/* Per-card gradient variation */
-.card-1 .flip-front { background: linear-gradient(140deg, #162040 0%, #1f3060 55%, #1a2744 100%); }
-.card-2 .flip-front { background: linear-gradient(158deg, #1a2744 0%, #1e3a5f 55%, #152233 100%); }
-.card-3 .flip-front { background: linear-gradient(130deg, #1c2e50 0%, #263a68 58%, #1a2744 100%); }
-.card-4 .flip-front { background: linear-gradient(150deg, #161f3e 0%, #1e3960 55%, #233562 100%); }
-.card-5 .flip-front { background: linear-gradient(136deg, #1a2e4a 0%, #1c3a6c 58%, #1a2744 100%); }
-.card-6 .flip-front { background: linear-gradient(145deg, #1e2a4a 0%, #2a3d68 55%, #1a2744 100%); }
-
-/* Back face: solid orange */
-.flip-back {
-  background: var(--orange);
-  transform: rotateY(180deg);
-  justify-content: flex-start;
-  align-items: flex-start; text-align: left;
-  padding: 44px 40px;
-}
-
-.feature-icon {
-  width: 48px; height: 48px;
+.feature-card-icon {
+  width: 60px; height: 60px; object-fit: contain;
   margin-bottom: 22px; flex-shrink: 0;
 }
-.flip-card-name {
-  font-size: 18px; font-weight: 600; letter-spacing: -0.015em;
-  color: #fff; line-height: 1.3;
+.feature-card-name {
+  font-size: 17px; font-weight: 600; color: var(--navy);
+  letter-spacing: -0.01em; margin-bottom: 14px; line-height: 1.3;
 }
-
-.flip-back-name {
-  font-size: 17px; font-weight: 600; letter-spacing: -0.015em;
-  color: #fff; margin-bottom: 14px; line-height: 1.3;
-}
-.flip-back-body {
-  font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.85);
-  line-height: 1.72;
+.feature-card-body {
+  font-size: 14px; font-weight: 300; color: var(--muted);
+  line-height: 1.75; text-align: left;
 }
 
 /* ============================================================
@@ -409,8 +415,9 @@ footer {
 @media (max-width: 900px) {
   nav { padding: 0 24px; }
   .nav-links { display: none; }
+  .nav-social { display: none; }
 
-  /* How It Works steps collapse to single column */
+  /* How It Works steps */
   .hiw-step {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -425,25 +432,23 @@ footer {
   .hiw-step-media { padding: 40px 32px; }
   .step-indicator { display: none; }
 
-  /* Feature cards: 2 columns */
+  /* Feature cards: 2 columns on tablet */
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 680px) {
   /* Three steps: stack */
-  .steps-grid { grid-template-columns: 1fr; }
-  .step-col { border-right: none; border-bottom: 0.5px solid var(--border); }
-  .step-col:last-child { border-bottom: none; }
-  .step-col { padding: 44px 32px; }
+  .steps-grid { grid-template-columns: 1fr; gap: 16px; }
 
   /* Feature cards: 1 column */
   .cards-grid { grid-template-columns: 1fr; }
 
+  footer { padding: 44px 24px 28px; }
   footer .footer-top { flex-direction: column; gap: 20px; }
   footer .footer-links { flex-wrap: wrap; gap: 16px; }
 
-  #video-section { padding: 80px 24px 0; }
-  #three-steps { padding: 96px 24px; }
+  #video-section { padding: 80px 24px 40px; }
+  #three-steps { padding: 80px 24px 100px; }
   #final-cta { padding: 96px 24px; }
   .cta-block { padding: 96px 24px; }
   #features-grid { padding: 60px 24px 80px; }
@@ -455,5 +460,5 @@ footer {
   .flip-card { aspect-ratio: 3/2; }
   .flip-front, .flip-back { padding: 28px 24px; }
   nav { padding: 0 20px; }
-  footer { padding: 44px 24px 28px; }
+  .nav-logo-img { height: 32px; }
 }

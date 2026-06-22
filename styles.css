@@ -311,6 +311,7 @@ footer {
 .hiw-step {
   display: grid; grid-template-columns: 1fr 1fr;
   border-bottom: 0.5px solid var(--border);
+  min-height: 420px;
 }
 .hiw-step.step-even { direction: rtl; }
 .hiw-step.step-even > * { direction: ltr; }

@@ -85,7 +85,10 @@
     <p class="step-body">Choose the files you want included in your label set. Process individual folders or complete case file collections in a single workflow. Prepare labels for pleadings, discovery, exhibits, correspondence, and case materials without formatting each label individually.</p>
   </div>
   <div class="hiw-step-media">
-    <img src="images/Select_Files.png" alt="Watch how to select your files" class="hiw-thumb">
+    <div class="hiw-media-wrap" data-video-id="tFMbNgK8iws">
+      <img src="images/Select_Files.png" alt="Watch how to select your files" class="hiw-thumb">
+      <div class="hiw-player" id="player-step1"></div>
+    </div>
   </div>
 </div>
 
@@ -96,7 +99,10 @@
     <p class="step-body">File Lable Pro reads your file names and creates a formatted label set ready for review. No repetitive typing. No manual formatting.</p>
   </div>
   <div class="hiw-step-media">
-    <img src="images/Generate_labels.png" alt="Watch how to generate your labels" class="hiw-thumb">
+    <div class="hiw-media-wrap" data-video-id="iqFYTyPaTeU">
+      <img src="images/Generate_labels.png" alt="Watch how to generate your labels" class="hiw-thumb">
+      <div class="hiw-player" id="player-step2"></div>
+    </div>
   </div>
 </div>
 
@@ -107,7 +113,10 @@
     <p class="step-body">Review your labels before printing. Rename entries, reorder items, remove labels, and adjust formatting as needed. Control capitalization, typography, spacing, and emphasis to match your preferred filing standards.</p>
   </div>
   <div class="hiw-step-media">
-    <img src="images/Review_&_customize.png" alt="Watch how to review and customize" class="hiw-thumb">
+    <div class="hiw-media-wrap" data-video-id="0vqgyPZVeWo">
+      <img src="images/Review_&_customize.png" alt="Watch how to review and customize" class="hiw-thumb">
+      <div class="hiw-player" id="player-step3"></div>
+    </div>
   </div>
 </div>
 
@@ -118,7 +127,10 @@
     <p class="step-body">Preview the final layout, verify formatting and alignment, and print directly to your preferred label sheets. Consistent output across every file set.</p>
   </div>
   <div class="hiw-step-media">
-    <img src="images/Print_labels.png" alt="Watch how to print your labels" class="hiw-thumb">
+    <div class="hiw-media-wrap" data-video-id="O88TX9_4y9Q">
+      <img src="images/Print_labels.png" alt="Watch how to print your labels" class="hiw-thumb">
+      <div class="hiw-player" id="player-step4"></div>
+    </div>
   </div>
 </div>
 
@@ -152,6 +164,55 @@
 </footer>
 
 <script>
+  // ── YouTube video players ──────────────────────────────────────
+  var ytPlayers = {};
+  var activeWrap = null;
+
+  (function() {
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  })();
+
+  function onYouTubeIframeAPIReady() {}
+
+  function resetWrap(wrap) {
+    var pid = wrap.querySelector('.hiw-player').id;
+    wrap.classList.remove('playing');
+    if (ytPlayers[pid]) ytPlayers[pid].stopVideo();
+    if (activeWrap === wrap) activeWrap = null;
+  }
+
+  document.querySelectorAll('.hiw-media-wrap').forEach(function(wrap) {
+    var videoId = wrap.dataset.videoId;
+    var playerId = wrap.querySelector('.hiw-player').id;
+
+    wrap.querySelector('.hiw-thumb').addEventListener('click', function() {
+      if (typeof YT === 'undefined' || !YT.Player) return;
+      if (activeWrap && activeWrap !== wrap) resetWrap(activeWrap);
+      wrap.classList.add('playing');
+      activeWrap = wrap;
+
+      if (ytPlayers[playerId]) {
+        ytPlayers[playerId].playVideo();
+      } else {
+        ytPlayers[playerId] = new YT.Player(playerId, {
+          videoId: videoId,
+          playerVars: { autoplay: 1, rel: 0, modestbranding: 1, playsinline: 1 },
+          events: {
+            onStateChange: function(event) {
+              if (event.data === YT.PlayerState.ENDED) {
+                wrap.classList.remove('playing');
+                if (activeWrap === wrap) activeWrap = null;
+              }
+            }
+          }
+        });
+      }
+    });
+  });
+  // ──────────────────────────────────────────────────────────────
+
   const hamburger = document.getElementById('navHamburger');
   const mobileMenu = document.getElementById('mobileMenu');
 
